@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils import timezone
 import uuid
 
 
@@ -13,7 +12,7 @@ class Country(models.Model):
 
 class City(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    country_id = models.ForeignKey(Country, on_delete=models.PROTECT)
+    country_id = models.ForeignKey('country_info.Country', on_delete=models.CASCADE, related_name='cities')
     title = models.CharField(max_length=200)
     desc = models.TextField()
     

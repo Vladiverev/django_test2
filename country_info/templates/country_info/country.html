@@ -1,0 +1,41 @@
+{% load static %}
+<head>
+    <title>Country and Cites</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/site.css' %}">
+</head>
+<body>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Country</th>
+                <th>City</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for country in country %}
+            <tr>
+                <td>
+                    <a href="">{{ country.title }}</a>
+                    <p>{{ country.text|linebreaksbr }}</p>
+                </td>
+                <td>
+                    {% for city in country.cities.all %}
+                    <strong>{{ city.title }}</strong>
+                    <p>{{ city.desc|linebreaks }}</p>
+                    {% empty %}
+                    <p>No city here yet :(</p>
+                    {% endfor %}
+                </td>
+            </tr>    
+            {% endfor %}
+
+            
+</table>
+</body>
+
+

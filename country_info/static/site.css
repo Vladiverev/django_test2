@@ -1,0 +1,21 @@
+h1 a {
+    color: #FCA205;
+}
+maket {
+    width: 100%; /* Ўирина всей таблицы */
+}
+
+TD {
+    vertical-align: top; /* ¬ертикальное выравнивание в €чейках */
+    padding: 5px; /* ѕол€ вокруг €чеек */
+}
+
+TD#leftcol {
+        width: 100px; /* Ўирина левой колонки */
+        background: #ccc; /* ÷вет фона левой колонки */
+        border-right: 1px dashed #000; /* ѕараметры линии */
+}
+
+TD#rightcol {
+        background: #fc3; /* ÷вет фона правой колонки */
+}
