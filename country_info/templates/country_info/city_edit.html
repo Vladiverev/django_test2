@@ -1,37 +1,71 @@
 {% extends 'country_info/base.html' %}
 
 {% block content %}
+
 <table class="table">
-    <thead>
-        <tr>
-            <th>Country</th>
-            <th>City</th>
-        </tr>
-    </thead>
-    <tbody>
-
-        <tr>
-            <td>
-                {% for country in countrys %}
-                <a href="{% url 'c_city' pk=country.pk %}">{{ country.title }}</a>
-                <p>{{ country.text|linebreaksbr }}</p>
-                {% endfor %}
-            </td>
-            <td>    
-                <h1> city</h1>
-                <form method="POST" class="post-form">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                <button type="submit" class="save btn btn-default">Send</button>
-                </form>
-                {% for city in country.cities.all %}
-                <strong>{{ city.title }}</strong>
-                <p>{{ city.desc|linebreaks }}</p>
-                {% empty %}
-                <p>No city here yet :(</p>
-                {% endfor %}
-            </td>
-        </tr>
-
+    <tr>
+        <td class="table1">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Country</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for count in countrys %}
+                    <tr>
+                        {%if count == country%}
+                        <td class="tablinks active">
+                            <h3 class="countryTitle">{{ count.title }}</h3>
+                            <p>{{ count.text|linebreaksbr }}</p>
+                        </td>
+                        {% else %}
+                        <td class="tablinks">
+                            <h3 class="countryTitle">{{ count.title }}</h3>
+                            <p>{{ count.text|linebreaksbr }}</p>
+                        </td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
 </table>
+        </td>
+        <td class="table2">
+            <table>
+                <thead>
+                    <tr>
+                        <th>City</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="{{country.title}}" class="tabcontent">
+                            {% if user.is_authenticated %}
+                            <a href="{% url 'city_add' pk_count=country.pk %}" class="btn btn-info" role="button">New city +</a>
+                            {% else %}
+                            {% endif %}
+                            <h1>New city</h1>
+                            <form method="POST" class="post-form">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <button type="submit" class="save btn btn-default">Send</button>
+                                <a href="{% url 'country_list'%}" class="btn btn-info" role="button">Cancel</a>
+                            </form>
+                            {% for city in cities %}
+                            <h3>{{city.title}}</h3>
+                            <p>{{ city.desc|linebreaks }}</p>
+                            {% if user.is_authenticated %}
+                            <a class="btn btn-default" href="{% url 'city_edit' pk_count=country.pk pk_city=city.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+                            <a class="btn btn-default" href="{% url 'city_remove' pk_city=city.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+                            {% else %}
+                            {% endif %}
+                            {% empty %}
+                            <p>No city here yet :(</p>
+                            {% endfor %}
+                        </td>
+                    </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
 {% endblock %}

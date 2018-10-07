@@ -8,18 +8,19 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="{% static 'css/site.css' %}">
+    {% block javascript %}
+    <script src="{% static '/js/country_tab.js' %}"></script>
+    <script src="{% static '/js/country_tab2.js' %}"></script>
+    {% endblock %}
 </head>
 <body>
     <div class="page-header">
         <h1>Countries of the World</h1>
     </div>
-    <div class="content container">
-        <div class="row">
-            <div class="col-md-8">
-                {% block content %}
-                {% endblock %}
-            </div>
-        </div>
+    <div class="tab">
+        {% block content %}
+        {% endblock %}
     </div>
 </body>
+
 </html>

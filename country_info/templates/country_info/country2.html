@@ -4,26 +4,26 @@
 
 <table class="table">
     <tr>
-        <td class="table1">
-            <table >
+        <td>
+            <table class="table">
                 <thead>
                     <tr>
                         <th>Country</th>
-                    </tr>
+                     </tr>
                 </thead>
                 <tbody>
                     {% for country in countrys %}
                     <tr>
                         <td class="tablinks" onclick="openCity(event, '{{country.title}}')">
-                            <h3 class="countryTitle">{{ country.title }}</h3>
+                            <p class="countryTitle">{{ country.title }}</p>
                             <p>{{ country.text|linebreaksbr }}</p>
-                        </td>
+                        </td>            
                     </tr>
                     {% endfor %}
             </table>
         </td>
-        <td class="table2">
-            <table >
+        <td>
+            <table class="table">
                 <thead>
                     <tr>
                         <th>City</th>
@@ -31,21 +31,15 @@
                 </thead>
                 <tbody>
                     {% for country in countrys %}
-                    <tr>
+                    <tr>            
                         <td id="{{country.title}}" class="tabcontent">
                             {% if user.is_authenticated %}
-                            <a href="{% url 'city_add' pk_count=country.pk %}" class="btn btn-info" role="button">New city +</a>
+                            <a href="{% url 'city_add' pk=country.pk %}" class="btn btn-info" role="button">New city +</a>
                             {% else %}
                             {% endif %}
                             {% for city in country.cities.all %}
-                            <h4>{{city.title}}</h4>
+                            <h3>{{city.title}}</h3>
                             <p>{{ city.desc|linebreaks }}</p>
-                            {% if user.is_authenticated %}
-                            <a class="btn btn-default" href="{% url 'city_edit' pk_count=country.pk pk_city=city.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
-                            <a class="btn btn-default" href="{% url 'city_remove' pk_city=city.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
-                            {% else %}
-                            {% endif %}
-                            
                             {% empty %}
                             <p>No city here yet :(</p>
                             {% endfor %}
@@ -55,11 +49,6 @@
             </table>
         </td>
     </tr>
-</table>
-
-<div id="">
-</div>
-
 
 {% endblock %}
 

@@ -13,7 +13,7 @@ class Country(models.Model):
         ordering = ['title']
 
 
-
+# Many Cities fo one country
 class City(models.Model):
     country_id = models.ForeignKey('country_info.Country', on_delete=models.CASCADE, null=True , related_name='cities')
     title = models.CharField(max_length=200)

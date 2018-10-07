@@ -10,45 +10,42 @@ def country_list(request):
     countrys = Country.objects.order_by("title")
     return render(request, 'country_info/country.html', {'countrys': countrys})
 
-def c_city(request, pk):
-    countrys = Country.objects.order_by("title")
-    country = get_object_or_404(Country, pk=pk)
-    return render(request, 'country_info/c_city.html', {'country': country, 'countrys': countrys})
-
+# pk_count - country primary key
 @login_required
-def city_add(request, pk):
+def city_add(request, pk_count):
     countrys = Country.objects.order_by("title")
-    country = get_object_or_404(Country, pk=pk)
+    cities = City.objects.order_by("title")
+    country = get_object_or_404(Country, pk=pk_count)
     if request.method == "POST":
         form = CityForm(request.POST)
         if form.is_valid():
             city = form.save(commit=False)
             city.country_id = country
             city.save()
-            return redirect('c_city', pk=country.pk)
+            return redirect('country_list')
     else:
         form = CityForm()
-    return render(request, 'country_info/city_add.html', {'form': form, 'country': country, 'countrys': countrys})
+    return render(request, 'country_info/city_add.html', {'form': form, 'countrys': countrys, "country": country, "cities": cities})
 
 @login_required
 def city_edit(request, pk_count, pk_city):
     countrys = Country.objects.order_by("title")
-    country = get_object_or_404(Country, pk=pk_count)
+    cities = City.objects.order_by("title")
     city = get_object_or_404(City, pk=pk_city)
+    country = get_object_or_404(Country, pk=pk_count)
     if request.method == "POST":
         form = CityForm(request.POST, instance=city)
         if form.is_valid():
             city = form.save(commit=False)
             city.save()
-            return redirect('c_city', pk=pk_count)
+            return redirect('country_list')
     else:
         form = CityForm(instance=city)
-    return render(request, 'country_info/city_edit.html', {'form': form, 'country': country, 'countrys': countrys})
+    return render(request, 'country_info/city_edit.html', {'form': form, 'countrys': countrys, "country": country, "cities": cities})
 
 @login_required
-def city_remove(request, pk_count, pk_city):
+def city_remove(request, pk_city):
     countrys = Country.objects.order_by("title")
-    country = get_object_or_404(Country, pk=pk_count)
     city = get_object_or_404(City, pk=pk_city)
     city.delete()
-    return render(request, 'country_info/c_city.html', {'country': country, 'countrys': countrys})
+    return render(request, 'country_info/country.html', {'countrys': countrys})
