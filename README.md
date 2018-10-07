@@ -4,17 +4,18 @@ Countries & Cities Sorting app.
 
 
 #Building
-$python3 -m venv testing \n
-$source testing/Scripts/activate \n
-$python3 -m pip install --upgrade pip \n
-$pip install -r requirements.txt \n
-$python manage.py makemigrations \n
-$python manage.py migrate \n
-$winpty python manage.py createsuperuser \n
-$python manage.py runserver \n
+<p>
+$python3 -m venv testing <br/>
+$source testing/Scripts/activate <br/>
+$python3 -m pip install --upgrade pip <br/>
+$pip install -r requirements.txt <br/>
+$python manage.py makemigrations <br/>
+$python manage.py migrate <br/>
+$winpty python manage.py createsuperuser <br/>
+$python manage.py runserver <br/>
+</p>
 
-
-Then visit http://127.0.0.1:8000/ to view the app.  \n
+Then visit http://127.0.0.1:8000/ to view the app.  <br/>
 
 # requirements
 
