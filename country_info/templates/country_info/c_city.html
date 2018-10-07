@@ -1,0 +1,50 @@
+﻿{% extends 'country_info/base.html' %}
+
+{% block content %}
+
+<table  class="table table-borderless">
+    <thead>
+        <tr>
+            <th>Country</th>
+            <th>City</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        <tr>
+            <td>
+                {{ country }}
+
+                {% for country in countrys %}
+
+                <div class="list-group">
+                    <a href="{% url 'c_city' pk=country.pk %}" class="list-group-item">
+                        <h4 class="list-group-item-heading">{{ country.title }}</h4>
+                        <p>{{ country.text|linebreaksbr }}</p>
+                    </a>
+                </div>
+                {% endfor %}
+
+
+            </td>
+            <td>
+                {% if user.is_authenticated %}
+                <a href="{% url 'city_add' pk=country.pk %}" class="btn btn-info" role="button">New city +</a>
+                {% else %}
+                {% endif %}
+                {% for city in country.cities.all %}
+                <strong>{{ city.title|linebreaks }}</strong>
+                {% if user.is_authenticated %}
+                <a class="btn btn-default" href="{% url 'city_edit' pk_count=country.pk pk_city=city.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+                <a class="btn btn-default" href="{% url 'city_remove'  pk_count=country.pk pk_city=city.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+                {% else %}
+                {% endif %}
+                <p>{{ city.desc|linebreaks }}</p>
+                {% empty %}
+                <p>No city here yet :(</p>
+                {% endfor %}
+            </td>
+        </tr>
+       
+</table>
+{% endblock %}

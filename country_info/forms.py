@@ -2,8 +2,9 @@ from django import forms
 
 from .models import Country, City
 
-class PostForm(forms.ModelForm):
+class CityForm(forms.ModelForm):
 
-    class Meta:
-        model = City
-        fields = ('title', 'desc',)
+   class Meta:
+       model = City
+       fields = ('title', 'desc',)
+
