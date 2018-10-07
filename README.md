@@ -5,9 +5,9 @@ Countries & Cities Sorting app.
 
 #Building
 <p>
-$python3 -m venv testing <br/>
+$python -m venv testing <br/>
 $source testing/Scripts/activate <br/>
-$python3 -m pip install --upgrade pip <br/>
+$python -m pip install --upgrade pip <br/>
 $pip install -r requirements.txt <br/>
 $python manage.py makemigrations <br/>
 $python manage.py migrate <br/>
